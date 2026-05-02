@@ -21,7 +21,9 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "test:all": "npm run test && npm run test:e2e",
+    "test:all:report": "mkdir -p reports && (echo \"Test run: $(date)\"; echo \"\"; echo \"=== Vitest ===\"; npm run test; echo \"\"; echo \"=== Playwright ===\"; npm run test:e2e) 2>&1 | tee reports/all-tests-report.txt"
   },
   "dependencies": {
     "clsx": "^2.1.1",
