@@ -1,5 +1,34 @@
 # SimMagic
 
+## Snel starten (lokaal)
+
+**Vereisten:** Node.js 20+ en npm 10+
+
+**Stap 1 — Dependencies installeren** (eenmalig, of na `git pull`):
+```bash
+npm install
+```
+
+**Stap 2 — Site starten:**
+```bash
+npm run dev
+```
+
+Site is daarna bereikbaar op:
+- http://localhost:3000/nl
+- http://localhost:3000/en
+
+**Stap 3 — CMS starten** (apart terminal-venster, optioneel):
+```bash
+npm run cms:proxy
+```
+
+CMS is daarna bereikbaar op:
+- http://localhost:3000/admin (GitHub OAuth vereist)
+- http://localhost:3000/admin?local_backend=true (geen login nodig, werkt alleen als proxy draait)
+
+---
+
 SimMagic is a bilingual open-source website for GitHub user sim007.
 
 Core stack:
