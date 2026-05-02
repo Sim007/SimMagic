@@ -61,10 +61,12 @@ src/tests/
   unit/
     i18n.test.ts                  — locale-helpers
     messages.test.ts              — vertaalfunctie t()
+    search.test.ts                — labelForType() helper voor zoekresultaten
   integration/
     ThemeProvider.test.tsx        — dark/light toggle (React Testing Library)
+    SearchBar.test.tsx            — zoekbalk met gemockte Pagefind API
   e2e/
-    site.spec.ts                  — homepage, navigatie, taalswitch, thema, 404
+    site.spec.ts                  — homepage, navigatie, taalswitch, thema, zoeken, 404
 ```
 
 ---

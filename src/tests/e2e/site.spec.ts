@@ -78,3 +78,40 @@ test.describe("404 pagina", () => {
     expect(response?.status()).toBe(404);
   });
 });
+
+test.describe("Zoeken", () => {
+  test("zoekbalk is zichtbaar op de homepage", async ({ page }) => {
+    await page.goto("/nl");
+    const input = page.getByPlaceholderText(/zoek/i);
+    await expect(input).toBeVisible();
+  });
+
+  test("zoeken toont resultaten sectie na invoer", async ({ page }) => {
+    await page.goto("/nl");
+    const input = page.getByPlaceholderText(/zoek/i);
+    await input.fill("sim");
+    // Resultaten-header moet verschijnen (Pagefind index aanwezig na npm run build)
+    await expect(page.getByText(/resultaten/i)).toBeVisible({ timeout: 5000 });
+  });
+
+  test("zoeken naar bestaande term toont minstens één resultaat", async ({ page }) => {
+    await page.goto("/nl");
+    const input = page.getByPlaceholderText(/zoek/i);
+    await input.fill("simmagic");
+    await expect(page.locator("ul li")).toHaveCount({ minimum: 1 } as never, { timeout: 5000 });
+  });
+
+  test("zoeken naar onbekende term toont geen-resultaten melding", async ({ page }) => {
+    await page.goto("/nl");
+    const input = page.getByPlaceholderText(/zoek/i);
+    await input.fill("xyzbestaatniet99999");
+    await expect(page.getByText(/geen resultaten/i)).toBeVisible({ timeout: 5000 });
+  });
+
+  test("zoekbalk werkt ook op de EN versie", async ({ page }) => {
+    await page.goto("/en");
+    const input = page.getByPlaceholderText(/.+/);
+    await input.fill("simmagic");
+    await expect(page.locator("ul li").first()).toBeVisible({ timeout: 5000 });
+  });
+});

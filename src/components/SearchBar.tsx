@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { Locale } from "@/lib/i18n";
+import { loadPagefind } from "@/lib/pagefind-loader";
+import type { PagefindApi } from "@/lib/pagefind-types";
 
 type SearchResultItem = {
   url: string;
@@ -27,19 +29,6 @@ type SearchLabels = {
 type SearchBarProps = {
   locale: Locale;
   labels: SearchLabels;
-};
-
-type PagefindApi = {
-  search: (
-    term: string,
-    options?: {
-      filters?: Record<string, string | string[]>;
-    }
-  ) => Promise<{
-    results: Array<{
-      data: () => Promise<SearchResultItem>;
-    }>;
-  }>;
 };
 
 declare global {
@@ -76,9 +65,8 @@ export default function SearchBar({ locale, labels }: SearchBarProps) {
           return;
         }
 
-        // pagefind.js is an ES module — use dynamic import so import.meta works
-        const mod = await import(/* webpackIgnore: true */ "/pagefind/pagefind.js") as PagefindApi;
-        if (active && mod?.search) {
+        const mod = await loadPagefind();
+        if (active && mod) {
           setApi(mod);
         }
       } catch {
