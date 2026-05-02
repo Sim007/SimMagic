@@ -8,9 +8,9 @@ import { getNavigation } from "@/lib/navigation";
 
 type LocaleLayoutProps = {
   children: ReactNode;
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 };
 
 export function generateStaticParams() {
@@ -18,11 +18,12 @@ export function generateStaticParams() {
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  if (!isLocale(params.locale)) {
+  const { locale: localeParam } = await params;
+  if (!isLocale(localeParam)) {
     notFound();
   }
 
-  const locale = fallbackLocale(params.locale) as Locale;
+  const locale = fallbackLocale(localeParam) as Locale;
   const messages = await getMessages(locale);
   const navItems = await getNavigation(locale, messages);
 

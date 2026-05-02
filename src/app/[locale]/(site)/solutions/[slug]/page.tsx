@@ -5,10 +5,10 @@ import { isLocale } from "@/lib/i18n";
 import { getMessages, t } from "@/lib/messages";
 
 type SolutionDetailPageProps = {
-  params: {
+  params: Promise<{
     locale: string;
     slug: string;
-  };
+  }>;
 };
 
 export async function generateStaticParams() {
@@ -17,13 +17,14 @@ export async function generateStaticParams() {
 }
 
 export default async function SolutionDetailPage({ params }: SolutionDetailPageProps) {
-  if (!isLocale(params.locale)) {
+  const { locale: localeParam, slug } = await params;
+  if (!isLocale(localeParam)) {
     notFound();
   }
 
-  const locale = params.locale;
+  const locale = localeParam;
   const messages = await getMessages(locale);
-  const solution = await getSolutionBySlug(params.slug, locale);
+  const solution = await getSolutionBySlug(slug, locale);
 
   if (!solution) {
     notFound();

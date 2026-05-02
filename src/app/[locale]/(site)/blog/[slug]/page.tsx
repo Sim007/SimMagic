@@ -5,10 +5,10 @@ import { isLocale } from "@/lib/i18n";
 import { getMessages, t } from "@/lib/messages";
 
 type BlogDetailPageProps = {
-  params: {
+  params: Promise<{
     locale: string;
     slug: string;
-  };
+  }>;
 };
 
 function formatDate(value: string | undefined, locale: string): string {
@@ -34,13 +34,14 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
-  if (!isLocale(params.locale)) {
+  const { locale: localeParam, slug } = await params;
+  if (!isLocale(localeParam)) {
     notFound();
   }
 
-  const locale = params.locale;
+  const locale = localeParam;
   const messages = await getMessages(locale);
-  const post = await getBlogPostBySlug(params.slug, locale);
+  const post = await getBlogPostBySlug(slug, locale);
 
   if (!post) {
     notFound();

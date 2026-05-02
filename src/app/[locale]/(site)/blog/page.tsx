@@ -5,9 +5,9 @@ import { isLocale } from "@/lib/i18n";
 import { getMessages, t } from "@/lib/messages";
 
 type BlogPageProps = {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 };
 
 function formatDate(value: string | undefined, locale: string): string {
@@ -28,11 +28,12 @@ function formatDate(value: string | undefined, locale: string): string {
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  if (!isLocale(params.locale)) {
+  const { locale: localeParam } = await params;
+  if (!isLocale(localeParam)) {
     notFound();
   }
 
-  const locale = params.locale;
+  const locale = localeParam;
   const messages = await getMessages(locale);
   const [posts, blogPage] = await Promise.all([getAllBlogPosts(locale), getPageBySlug("blog", locale)]);
 

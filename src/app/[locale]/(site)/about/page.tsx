@@ -4,17 +4,18 @@ import { isLocale } from "@/lib/i18n";
 import { getMessages, t } from "@/lib/messages";
 
 type AboutPageProps = {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 };
 
 export default async function AboutPage({ params }: AboutPageProps) {
-  if (!isLocale(params.locale)) {
+  const { locale: localeParam } = await params;
+  if (!isLocale(localeParam)) {
     notFound();
   }
 
-  const locale = params.locale;
+  const locale = localeParam;
   const messages = await getMessages(locale);
   const content = await getPageBySlug("about", locale);
 

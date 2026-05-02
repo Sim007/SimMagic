@@ -6,17 +6,18 @@ import { isLocale } from "@/lib/i18n";
 import { getMessages, t } from "@/lib/messages";
 
 type SolutionsPageProps = {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 };
 
 export default async function SolutionsPage({ params }: SolutionsPageProps) {
-  if (!isLocale(params.locale)) {
+  const { locale: localeParam } = await params;
+  if (!isLocale(localeParam)) {
     notFound();
   }
 
-  const locale = params.locale;
+  const locale = localeParam;
   const messages = await getMessages(locale);
   const [solutions, solutionsPage] = await Promise.all([
     getAllSolutions(locale),

@@ -3,13 +3,14 @@ import { getMessages, t } from "@/lib/messages";
 import { fallbackLocale } from "@/lib/i18n";
 
 type NotFoundProps = {
-  params: {
+  params?: Promise<{
     locale: string;
-  };
+  }>;
 };
 
 export default async function NotFound({ params }: NotFoundProps) {
-  const locale = fallbackLocale(params?.locale);
+  const resolved = params ? await params : undefined;
+  const locale = fallbackLocale(resolved?.locale);
   const messages = await getMessages(locale);
 
   return (
