@@ -29,6 +29,32 @@ CMS is daarna bereikbaar op:
 
 ---
 
+## Testen
+
+| Commando | Type | Omschrijving |
+|---|---|---|
+| `npm test` | Unit + Integratie | Vitest eenmalig draaien |
+| `npm run test:watch` | Unit + Integratie | Vitest in watch-mode (herstart bij wijzigingen) |
+| `npm run test:coverage` | Unit + Integratie | Vitest met coverage-rapport (uitvoer in `coverage/`) |
+| `npm run test:e2e` | E2E | Playwright in terminal (start dev-server automatisch) |
+| `npm run test:e2e:ui` | E2E | Playwright met visuele UI |
+
+### Teststructuur
+
+```
+src/tests/
+  setup.ts                        — globale mocks (matchMedia, jest-dom)
+  unit/
+    i18n.test.ts                  — locale-helpers
+    messages.test.ts              — vertaalfunctie t()
+  integration/
+    ThemeProvider.test.tsx        — dark/light toggle (React Testing Library)
+  e2e/
+    site.spec.ts                  — homepage, navigatie, taalswitch, thema, 404
+```
+
+---
+
 SimMagic is a bilingual open-source website for GitHub user sim007.
 
 ## Versies / Versions
