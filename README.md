@@ -126,11 +126,29 @@ Triggers:
 - push to main
 - workflow_dispatch
 
-Required GitHub secrets:
-- SSH_HOST
-- SSH_USER
-- SSH_PRIVATE_KEY
-- SERVER_APP_DIR
+Required GitHub secrets — configure these under Settings → Secrets and variables → Actions:
+
+| Secret name      | Description                                                     | Example value                   |
+|------------------|-----------------------------------------------------------------|---------------------------------|
+| SSH_HOST         | Hostname or IP of your server                                   | 203.0.113.42                    |
+| SSH_USER         | SSH username on the server                                      | deploy                          |
+| SSH_PRIVATE_KEY  | Full PEM-encoded private key matching the user's authorized_key | -----BEGIN OPENSSH PRIVATE KEY----- ... |
+| SERVER_APP_DIR   | Absolute path to the project folder on the server              | /opt/simmagic                   |
+
+Optional — set as repository variable (not secret):
+
+| Variable name          | Description                | Example value                       |
+|------------------------|----------------------------|-------------------------------------|
+| NEXT_PUBLIC_SITE_URL   | Public URL of your site    | https://simmagic.example.com        |
+
+Setup steps on the server:
+1. Create the deploy user account
+2. Generate an SSH key pair: `ssh-keygen -t ed25519 -C "github-actions"`
+3. Add the public key to `~/.ssh/authorized_keys` on the server
+4. Add the private key as GitHub secret `SSH_PRIVATE_KEY`
+5. Install Docker and Docker Compose on the server
+6. Clone the repository into `SERVER_APP_DIR` once manually
+7. Subsequent deploys happen automatically on push to main
 
 The workflow builds the project and deploys through SSH to your own server.
 
