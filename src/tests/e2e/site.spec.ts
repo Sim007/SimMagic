@@ -61,16 +61,16 @@ test.describe("Thema toggle", () => {
   test("toggle schakelt dark/light class op html element", async ({ page }) => {
     await page.goto("/nl");
     const toggle = page.getByRole("button", { name: /modus/i });
+    const html = page.locator("html");
 
-    const htmlClass = await page.locator("html").getAttribute("class");
+    const htmlClass = await html.getAttribute("class");
     const wasDark = (htmlClass ?? "").includes("dark");
 
     await toggle.click();
 
-    const htmlClassAfter = await page.locator("html").getAttribute("class");
-    const isDarkAfter = (htmlClassAfter ?? "").includes("dark");
-
-    expect(isDarkAfter).toBe(!wasDark);
+    await expect
+      .poll(async () => ((await html.getAttribute("class")) ?? "").includes("dark"))
+      .toBe(!wasDark);
   });
 });
 
