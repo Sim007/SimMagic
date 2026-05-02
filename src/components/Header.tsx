@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import SearchInput from "@/components/SearchInput";
 import ThemeToggle from "@/components/ThemeToggle";
 import type { Locale } from "@/lib/i18n";
 
@@ -19,6 +20,8 @@ type HeaderProps = {
   navItems: NavItem[];
   openMenuLabel: string;
   closeMenuLabel: string;
+  searchPlaceholder: string;
+  searchButton: string;
 };
 
 function normalize(pathname: string): string {
@@ -33,7 +36,9 @@ export default function Header({
   siteName,
   navItems,
   openMenuLabel,
-  closeMenuLabel
+  closeMenuLabel,
+  searchPlaceholder,
+  searchButton
 }: HeaderProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -66,6 +71,13 @@ export default function Header({
           })}
         </nav>
 
+        <SearchInput
+          locale={locale}
+          placeholder={searchPlaceholder}
+          buttonLabel={searchButton}
+          className="hidden md:flex"
+        />
+
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <LanguageSwitcher locale={locale} />
@@ -85,6 +97,14 @@ export default function Header({
       {open ? (
         <nav className="shell pb-3 md:hidden">
           <div className="panel space-y-1 p-2">
+            <div className="px-1 pb-2">
+              <SearchInput
+                locale={locale}
+                placeholder={searchPlaceholder}
+                buttonLabel={searchButton}
+                className="w-full"
+              />
+            </div>
             {navItems.map((item) => {
               const active = current === normalize(item.href);
               return (

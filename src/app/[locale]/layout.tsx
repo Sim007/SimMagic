@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
-import SearchBar from "@/components/SearchBar";
 import { fallbackLocale, isLocale, type Locale } from "@/lib/i18n";
 import { getMessages, t } from "@/lib/messages";
 import { getNavigation } from "@/lib/navigation";
@@ -35,19 +34,8 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         navItems={navItems}
         openMenuLabel={t(messages, "nav.openMenu")}
         closeMenuLabel={t(messages, "nav.closeMenu")}
-      />
-
-      <SearchBar
-        locale={locale}
-        labels={{
-          placeholder: t(messages, "search.placeholder"),
-          button: t(messages, "search.button"),
-          results: t(messages, "search.results"),
-          noResults: t(messages, "search.noResults"),
-          typeBlog: t(messages, "search.typeBlog"),
-          typePage: t(messages, "search.typePage"),
-          typeSolution: t(messages, "search.typeSolution")
-        }}
+        searchPlaceholder={t(messages, "search.placeholder")}
+        searchButton={t(messages, "search.button")}
       />
 
       <main
