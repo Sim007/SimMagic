@@ -52,6 +52,9 @@ De zoekfunctie werkt op basis van een statische Pagefind-index. Die index wordt 
 | `npm run test:coverage` | Unit + Integratie | Vitest met coverage-rapport (uitvoer in `coverage/`) |
 | `npm run test:e2e` | E2E | Playwright in terminal (start dev-server automatisch) |
 | `npm run test:e2e:ui` | E2E | Playwright met visuele UI |
+| `npm run test:all` | Alle | Vitest + Playwright achter elkaar |
+| `npm run test:all:report` | Alle | Zelfde + sla uitvoer op in `reports/all-tests-report.txt` |
+| `npm run test:all:html` | Alle | Zelfde + genereer `reports/all-tests-report.html` (dashboard) |
 
 ### Teststructuur
 
