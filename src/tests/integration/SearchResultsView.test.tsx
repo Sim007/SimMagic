@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import SearchResultsView from "@/components/SearchResultsView";
 
 const mockSearch = vi.fn();
@@ -39,9 +39,11 @@ describe("SearchResultsView (integratie)", () => {
     mockGet.mockReturnValue(null);
   });
 
-  it("toont niets zonder zoekterm in de URL", () => {
+  it("toont niets zonder zoekterm in de URL", async () => {
     mockGet.mockReturnValue(null);
-    render(<SearchResultsView locale="nl" labels={labels} />);
+    await act(async () => {
+      render(<SearchResultsView locale="nl" labels={labels} />);
+    });
     expect(screen.queryByText("Zoekresultaten")).not.toBeInTheDocument();
     expect(screen.queryByText("Geen resultaten gevonden")).not.toBeInTheDocument();
   });
