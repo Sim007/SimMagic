@@ -10,7 +10,7 @@ const ContentSecurityPolicy = [
   "style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https:",
-  `connect-src 'self' ${siteUrl} https://api.github.com https://unpkg.com`,
+  `connect-src 'self' ${siteUrl} https://api.github.com https://unpkg.com http://localhost:8081 http://127.0.0.1:8081`,
   "frame-src 'self'",
   "form-action 'self'",
   "base-uri 'self'"
@@ -37,6 +37,20 @@ const nextConfig = {
         hostname: "images.unsplash.com"
       }
     ]
+  },
+  async redirects() {
+    return [
+      {
+        source: "/admin",
+        destination: "/admin/index.html",
+        permanent: false
+      },
+      {
+        source: "/admin/",
+        destination: "/admin/index.html",
+        permanent: false
+      }
+    ];
   },
   async headers() {
     return [
