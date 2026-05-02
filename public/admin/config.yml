@@ -1,0 +1,184 @@
+backend:
+  name: github
+  repo: sim007/simmagic
+  branch: main
+  base_url: https://simmagic.example.com
+  auth_endpoint: /api/auth
+
+media_folder: public/uploads
+public_folder: /uploads
+
+site_url: https://simmagic.example.com
+logo_url: /uploads/simmagic-cover.svg
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: pages
+    label: Pagina's
+    folder: content/pages
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Slug, name: slug, widget: string }
+      - { label: Datum, name: date, widget: datetime, required: false }
+      - label: Titel
+        name: title
+        widget: object
+        fields:
+          - { label: NL, name: nl, widget: string }
+          - { label: EN, name: en, widget: string, required: false }
+      - label: Samenvatting
+        name: summary
+        widget: object
+        fields:
+          - { label: NL, name: nl, widget: text }
+          - { label: EN, name: en, widget: text, required: false }
+      - label: Body
+        name: body
+        widget: object
+        fields:
+          - { label: NL, name: nl, widget: markdown }
+          - { label: EN, name: en, widget: markdown, required: false }
+
+  - name: blog
+    label: Blogposts
+    folder: content/blog
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Slug, name: slug, widget: string }
+      - { label: Datum, name: date, widget: datetime }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Cover, name: coverImage, widget: image, required: false }
+      - label: Titel
+        name: title
+        widget: object
+        fields:
+          - { label: NL, name: nl, widget: string }
+          - { label: EN, name: en, widget: string, required: false }
+      - label: Samenvatting
+        name: summary
+        widget: object
+        fields:
+          - { label: NL, name: nl, widget: text }
+          - { label: EN, name: en, widget: text, required: false }
+      - label: Body
+        name: body
+        widget: object
+        fields:
+          - { label: NL, name: nl, widget: markdown }
+          - { label: EN, name: en, widget: markdown, required: false }
+
+  - name: solutions
+    label: Oplossingen
+    folder: content/solutions
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Slug, name: slug, widget: string }
+      - { label: Datum, name: date, widget: datetime }
+      - { label: Uitgelicht, name: featured, widget: boolean, required: false, default: false }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - label: Titel
+        name: title
+        widget: object
+        fields:
+          - { label: NL, name: nl, widget: string }
+          - { label: EN, name: en, widget: string, required: false }
+      - label: Samenvatting
+        name: summary
+        widget: object
+        fields:
+          - { label: NL, name: nl, widget: text }
+          - { label: EN, name: en, widget: text, required: false }
+      - label: Body
+        name: body
+        widget: object
+        fields:
+          - { label: NL, name: nl, widget: markdown }
+          - { label: EN, name: en, widget: markdown, required: false }
+      - label: Flow
+        name: flow
+        widget: object
+        fields:
+          - label: Probleem / Problem
+            name: problem
+            widget: object
+            fields:
+              - label: Titel
+                name: title
+                widget: object
+                fields:
+                  - { label: NL, name: nl, widget: string }
+                  - { label: EN, name: en, widget: string, required: false }
+              - label: Omschrijving
+                name: description
+                widget: object
+                fields:
+                  - { label: NL, name: nl, widget: text }
+                  - { label: EN, name: en, widget: text, required: false }
+              - { label: Screenshot, name: screenshot, widget: image, required: false }
+              - { label: Code snippet, name: codeSnippet, widget: text, required: false }
+              - { label: Demo link, name: demoUrl, widget: string, required: false }
+              - { label: Repo link, name: repoUrl, widget: string, required: false }
+          - label: Magie / Magic
+            name: magic
+            widget: object
+            fields:
+              - label: Titel
+                name: title
+                widget: object
+                fields:
+                  - { label: NL, name: nl, widget: string }
+                  - { label: EN, name: en, widget: string, required: false }
+              - label: Omschrijving
+                name: description
+                widget: object
+                fields:
+                  - { label: NL, name: nl, widget: text }
+                  - { label: EN, name: en, widget: text, required: false }
+              - { label: Screenshot, name: screenshot, widget: image, required: false }
+              - { label: Code snippet, name: codeSnippet, widget: text, required: false }
+              - { label: Demo link, name: demoUrl, widget: string, required: false }
+              - { label: Repo link, name: repoUrl, widget: string, required: false }
+          - label: Oplossing / Solution
+            name: solution
+            widget: object
+            fields:
+              - label: Titel
+                name: title
+                widget: object
+                fields:
+                  - { label: NL, name: nl, widget: string }
+                  - { label: EN, name: en, widget: string, required: false }
+              - label: Omschrijving
+                name: description
+                widget: object
+                fields:
+                  - { label: NL, name: nl, widget: text }
+                  - { label: EN, name: en, widget: text, required: false }
+              - { label: Screenshot, name: screenshot, widget: image, required: false }
+              - { label: Code snippet, name: codeSnippet, widget: text, required: false }
+              - { label: Demo link, name: demoUrl, widget: string, required: false }
+              - { label: Repo link, name: repoUrl, widget: string, required: false }
+
+  - name: navigation
+    label: Navigatie
+    files:
+      - label: Menu
+        name: menu
+        file: content/navigation.md
+        fields:
+          - label: Menu-items
+            name: items
+            widget: list
+            fields:
+              - { label: Key, name: key, widget: string }
+              - label: Label
+                name: label
+                widget: object
+                fields:
+                  - { label: NL, name: nl, widget: string }
+                  - { label: EN, name: en, widget: string, required: false }
+              - { label: Pad (zonder taalprefix), name: href, widget: string }

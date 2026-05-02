@@ -1,0 +1,59 @@
+import type { ReactNode } from "react";
+import { notFound } from "next/navigation";
+import Header from "@/components/Header";
+import SearchBar from "@/components/SearchBar";
+import { fallbackLocale, isLocale, type Locale } from "@/lib/i18n";
+import { getMessages, t } from "@/lib/messages";
+import { getNavigation } from "@/lib/navigation";
+
+type LocaleLayoutProps = {
+  children: ReactNode;
+  params: {
+    locale: string;
+  };
+};
+
+export function generateStaticParams() {
+  return [{ locale: "nl" }, { locale: "en" }];
+}
+
+export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
+  if (!isLocale(params.locale)) {
+    notFound();
+  }
+
+  const locale = fallbackLocale(params.locale) as Locale;
+  const messages = await getMessages(locale);
+  const navItems = await getNavigation(locale, messages);
+
+  return (
+    <div className="min-h-screen">
+      <Header
+        locale={locale}
+        siteName={t(messages, "site.name")}
+        navItems={navItems}
+        openMenuLabel={t(messages, "nav.openMenu")}
+        closeMenuLabel={t(messages, "nav.closeMenu")}
+      />
+
+      <SearchBar
+        locale={locale}
+        labels={{
+          placeholder: t(messages, "search.placeholder"),
+          button: t(messages, "search.button"),
+          results: t(messages, "search.results"),
+          noResults: t(messages, "search.noResults"),
+          typeBlog: t(messages, "search.typeBlog"),
+          typePage: t(messages, "search.typePage"),
+          typeSolution: t(messages, "search.typeSolution")
+        }}
+      />
+
+      <main className="shell py-8 md:py-10">{children}</main>
+
+      <footer className="border-t border-cyan-950/40 py-6 text-center text-xs text-slate-500">
+        <div className="shell">{t(messages, "site.tagline")}</div>
+      </footer>
+    </div>
+  );
+}

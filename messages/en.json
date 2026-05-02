@@ -1,0 +1,88 @@
+{
+  "site": {
+    "name": "SimMagic",
+    "tagline": "Problem -> Magic -> Solution",
+    "description": "Open-source projects and insights by sim007 using the SimMagic model."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "model": "Model",
+    "solutions": "Solutions",
+    "blog": "Blog",
+    "languageSwitch": "Language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "modelFlow": {
+    "problem": "Problem",
+    "magic": "Magic",
+    "solution": "Solution",
+    "problemLabel": "Problem",
+    "magicLabel": "Magic",
+    "solutionLabel": "Solution",
+    "ctaDemo": "View demo",
+    "ctaRepo": "View repository"
+  },
+  "search": {
+    "placeholder": "Search blog posts, pages, and solutions...",
+    "button": "Search",
+    "results": "Search results",
+    "noResults": "No results found.",
+    "allTypes": "All types",
+    "typeBlog": "Blog",
+    "typePage": "Page",
+    "typeSolution": "Solution",
+    "activeLanguage": "Active language",
+    "fallbackNotice": "Translation missing, showing Dutch version."
+  },
+  "home": {
+    "title": "SimMagic",
+    "intro": "From hard problem to clear solution using repeatable steps.",
+    "featuredSolutions": "Featured solutions",
+    "latestPosts": "Latest blog posts",
+    "viewAllSolutions": "All solutions",
+    "viewAllPosts": "All blog posts"
+  },
+  "about": {
+    "title": "About SimMagic",
+    "intro": "SimMagic is a practical way of building: define the real problem first, find the magic in the idea, then ship a concrete solution.",
+    "makerTitle": "Maker",
+    "makerBody": "SimMagic is built by sim007 with a focus on open source, reusable patterns, and clear documentation.",
+    "philosophyTitle": "Philosophy",
+    "philosophyBody": "Complexity can be creative, but outcomes must stay clear, testable, and shareable."
+  },
+  "model": {
+    "title": "The SimMagic model",
+    "intro": "This flow helps turn ideas into working software in a consistent way.",
+    "problemDesc": "Define the real pain and context.",
+    "magicDesc": "Iterate until the core idea clicks.",
+    "solutionDesc": "Build, validate, and publish a concrete solution."
+  },
+  "solutions": {
+    "title": "Solutions",
+    "intro": "Projects that show the SimMagic model in practice.",
+    "readMore": "Read more",
+    "empty": "No solutions available yet."
+  },
+  "blog": {
+    "title": "Blog",
+    "intro": "Notes, experiments, and lessons learned from open-source work.",
+    "readPost": "Read article",
+    "empty": "No blog posts available yet.",
+    "publishedOn": "Published on",
+    "tag": "Tag"
+  },
+  "common": {
+    "back": "Back",
+    "loading": "Loading...",
+    "readMore": "Read more",
+    "notFound": "Page not found",
+    "goHome": "Go to Home"
+  },
+  "errors": {
+    "contentMissing": "Content is missing.",
+    "languageNotSupported": "Language is not supported.",
+    "unexpected": "Something went wrong."
+  }
+}

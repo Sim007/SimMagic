@@ -1,0 +1,88 @@
+{
+  "site": {
+    "name": "SimMagic",
+    "tagline": "Probleem -> Magie -> Oplossing",
+    "description": "Open-source projecten en inzichten van sim007 volgens het SimMagic-model."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "Over",
+    "model": "Model",
+    "solutions": "Oplossingen",
+    "blog": "Blog",
+    "languageSwitch": "Taal",
+    "openMenu": "Menu openen",
+    "closeMenu": "Menu sluiten"
+  },
+  "modelFlow": {
+    "problem": "Probleem",
+    "magic": "Magie",
+    "solution": "Oplossing",
+    "problemLabel": "Probleem",
+    "magicLabel": "Magie",
+    "solutionLabel": "Oplossing",
+    "ctaDemo": "Bekijk demo",
+    "ctaRepo": "Bekijk repository"
+  },
+  "search": {
+    "placeholder": "Zoek in blog, pagina's en oplossingen...",
+    "button": "Zoeken",
+    "results": "Zoekresultaten",
+    "noResults": "Geen resultaten gevonden.",
+    "allTypes": "Alle types",
+    "typeBlog": "Blog",
+    "typePage": "Pagina",
+    "typeSolution": "Oplossing",
+    "activeLanguage": "Actieve taal",
+    "fallbackNotice": "Geen vertaling gevonden, NL-versie getoond."
+  },
+  "home": {
+    "title": "SimMagic",
+    "intro": "Van lastig probleem naar heldere oplossing met herhaalbare stappen.",
+    "featuredSolutions": "Uitgelichte oplossingen",
+    "latestPosts": "Laatste blogposts",
+    "viewAllSolutions": "Alle oplossingen",
+    "viewAllPosts": "Alle blogposts"
+  },
+  "about": {
+    "title": "Over SimMagic",
+    "intro": "SimMagic is een praktische manier van bouwen: eerst het probleem scherp krijgen, dan de magie van het idee, en daarna een concrete oplossing neerzetten.",
+    "makerTitle": "Maker",
+    "makerBody": "SimMagic wordt gemaakt door sim007, met focus op open source, herbruikbare patronen en duidelijke documentatie.",
+    "philosophyTitle": "Filosofie",
+    "philosophyBody": "Complexiteit mag creatief zijn, maar resultaten moeten helder, testbaar en deelbaar blijven."
+  },
+  "model": {
+    "title": "Het SimMagic-model",
+    "intro": "Deze flow helpt om ideeën consistent om te zetten in werkende software.",
+    "problemDesc": "Definieer de echte pijn en context.",
+    "magicDesc": "Zoek iteratief naar het juiste kernidee.",
+    "solutionDesc": "Bouw, valideer en publiceer een concrete oplossing."
+  },
+  "solutions": {
+    "title": "Oplossingen",
+    "intro": "Projecten die het SimMagic-model in de praktijk laten zien.",
+    "readMore": "Lees meer",
+    "empty": "Nog geen oplossingen beschikbaar."
+  },
+  "blog": {
+    "title": "Blog",
+    "intro": "Notities, experimenten en lessons learned uit open-source werk.",
+    "readPost": "Lees artikel",
+    "empty": "Nog geen blogposts beschikbaar.",
+    "publishedOn": "Gepubliceerd op",
+    "tag": "Tag"
+  },
+  "common": {
+    "back": "Terug",
+    "loading": "Laden...",
+    "readMore": "Lees meer",
+    "notFound": "Pagina niet gevonden",
+    "goHome": "Ga naar Home"
+  },
+  "errors": {
+    "contentMissing": "Inhoud ontbreekt.",
+    "languageNotSupported": "Taal wordt niet ondersteund.",
+    "unexpected": "Er ging iets mis."
+  }
+}
