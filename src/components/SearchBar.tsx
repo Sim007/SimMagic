@@ -76,30 +76,10 @@ export default function SearchBar({ locale, labels }: SearchBarProps) {
           return;
         }
 
-        await new Promise<void>((resolve, reject) => {
-          const existing = document.querySelector<HTMLScriptElement>(
-            'script[data-pagefind="runtime"]'
-          );
-
-          if (existing) {
-            existing.addEventListener("load", () => resolve(), { once: true });
-            existing.addEventListener("error", () => reject(new Error("pagefind load failed")), {
-              once: true
-            });
-            return;
-          }
-
-          const script = document.createElement("script");
-          script.src = "/pagefind/pagefind.js";
-          script.async = true;
-          script.dataset.pagefind = "runtime";
-          script.onload = () => resolve();
-          script.onerror = () => reject(new Error("pagefind load failed"));
-          document.body.appendChild(script);
-        });
-
-        if (active && window.pagefind?.search) {
-          setApi(window.pagefind);
+        // pagefind.js is an ES module — use dynamic import so import.meta works
+        const mod = await import(/* webpackIgnore: true */ "/pagefind/pagefind.js") as PagefindApi;
+        if (active && mod?.search) {
+          setApi(mod);
         }
       } catch {
         setApi(null);

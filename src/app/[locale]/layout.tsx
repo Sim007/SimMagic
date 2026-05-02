@@ -50,7 +50,13 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         }}
       />
 
-      <main className="shell py-8 md:py-10">{children}</main>
+      <main
+        className="shell py-8 md:py-10"
+        data-pagefind-body
+        data-pagefind-filter={`locale:${locale}`}
+      >
+        {children}
+      </main>
 
       <footer className="border-t border-cyan-950/40 py-6 text-center text-xs text-slate-500">
         <div className="shell">{t(messages, "site.tagline")}</div>

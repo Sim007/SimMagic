@@ -29,6 +29,20 @@ CMS is daarna bereikbaar op:
 
 ---
 
+## Bouwen en zoekindex
+
+De zoekfunctie werkt op basis van een statische Pagefind-index. Die index wordt aangemaakt tijdens de build en opgeslagen in `public/pagefind/`. De dev-server (`npm run dev`) gebruikt altijd de index van de laatste build.
+
+| Commando | Omschrijving |
+|---|---|
+| `npm run build` | Productie-build + zoekindex aanmaken |
+| `npm start` | Productieserver starten (na `npm run build`) |
+| `npm run pagefind` | Alleen de zoekindex herbouwen (na een bestaande build) |
+
+> Na het toevoegen of wijzigen van content moet je opnieuw `npm run build` draaien om de zoekindex bij te werken.
+
+---
+
 ## Testen
 
 | Commando | Type | Omschrijving |
