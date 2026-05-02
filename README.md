@@ -31,6 +31,19 @@ CMS is daarna bereikbaar op:
 
 SimMagic is a bilingual open-source website for GitHub user sim007.
 
+## Versies / Versions
+
+| Package | Versie |
+|---|---|
+| Next.js | 16.2.4 |
+| React | 19.2.5 |
+| TypeScript | 5.8.3 |
+| Tailwind CSS | 3.4.17 |
+| Pagefind | 1.3.0 |
+| Decap CMS (CDN) | 3.3.3 |
+| Decap Server (proxy) | 3.7.0 |
+| Node.js (vereist) | 20+ |
+
 Core stack:
 - Next.js (App Router)
 - Tailwind CSS (dark by default, accent cyan #06b6d4)
