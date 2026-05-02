@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ThemeProvider from "@/components/ThemeProvider";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://simmagic.example.com";
 
@@ -39,8 +40,18 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="nl" className="dark">
-      <body>{children}</body>
+    <html lang="nl" suppressHydrationWarning>
+      <head>
+        {/* Prevent flash of wrong theme on first paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var s=localStorage.getItem('theme');var d=document.documentElement;if(s==='light'){d.classList.remove('dark')}else if(s==='dark'){d.classList.add('dark')}else{if(window.matchMedia('(prefers-color-scheme: dark)').matches){d.classList.add('dark')}else{d.classList.remove('dark')}}})();`
+          }}
+        />
+      </head>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

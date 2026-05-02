@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ThemeToggle from "@/components/ThemeToggle";
 import type { Locale } from "@/lib/i18n";
 
 type NavItem = {
@@ -40,7 +41,7 @@ export default function Header({
   const current = useMemo(() => normalize(pathname), [pathname]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-cyan-900/40 bg-slate-950/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--bg)]/85 backdrop-blur">
       <div className="shell flex min-h-16 items-center justify-between gap-4 py-2">
         <Link href={`/${locale}`} className="text-sm font-semibold tracking-[0.14em] text-cyan-300">
           {siteName}
@@ -66,6 +67,7 @@ export default function Header({
         </nav>
 
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <LanguageSwitcher locale={locale} />
 
           <button
