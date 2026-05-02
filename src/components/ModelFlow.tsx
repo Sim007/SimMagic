@@ -166,7 +166,7 @@ export default function ModelFlow({ locale, flow, labels }: ModelFlowProps) {
     <section className="space-y-3 md:space-y-0">
       <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-start">
         <StepCard locale={locale} step={flow.problem} title={labels.problem} cyan labels={labels} />
-        <div className="flex items-center justify-center text-cyan-300">→</div>
+        <div className="hidden items-center justify-center text-cyan-300 md:flex">→</div>
         <StepCard
           locale={locale}
           step={flow.magic}
@@ -174,7 +174,7 @@ export default function ModelFlow({ locale, flow, labels }: ModelFlowProps) {
           labels={labels}
           animatedWord={magicWord}
         />
-        <div className="flex items-center justify-center text-cyan-300">→</div>
+        <div className="hidden items-center justify-center text-cyan-300 md:flex">→</div>
         <StepCard locale={locale} step={flow.solution} title={labels.solution} cyan labels={labels} />
       </div>
     </section>

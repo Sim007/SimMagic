@@ -48,7 +48,7 @@ export default async function SolutionsPage({ params }: SolutionsPageProps) {
         />
       ) : null}
 
-      <section className="grid gap-4 md:grid-cols-2">
+      <section className="grid gap-6">
         {solutions.length === 0 ? (
           <p className="text-sm text-slate-400">{t(messages, "solutions.empty")}</p>
         ) : (
