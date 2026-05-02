@@ -119,6 +119,7 @@ function StepCard({
       <p className="mt-2 text-sm leading-relaxed text-slate-300">{stepDescription}</p>
 
       {step.screenshot ? (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={step.screenshot}
           alt={stepTitle}

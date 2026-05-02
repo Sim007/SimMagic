@@ -8,7 +8,7 @@ RUN npm ci
 FROM deps AS dev
 COPY . .
 EXPOSE 3000
-CMD ["npm", "run", "dev", "--", "-H", "0.0.0.0", "-p", "3000"]
+CMD ["node_modules/.bin/next", "dev", "-H", "0.0.0.0", "-p", "3000"]
 
 FROM deps AS builder
 COPY . .
@@ -25,4 +25,4 @@ COPY --from=builder /app/next.config.mjs ./next.config.mjs
 COPY --from=builder /app/content ./content
 COPY --from=builder /app/messages ./messages
 EXPOSE 3000
-CMD ["npm", "run", "start", "--", "-H", "0.0.0.0", "-p", "3000"]
+CMD ["node_modules/.bin/next", "start", "-H", "0.0.0.0", "-p", "3000"]

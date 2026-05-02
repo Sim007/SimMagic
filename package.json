@@ -14,7 +14,7 @@
     "dev:cms": "npm run dev",
     "build": "next build && npm run pagefind",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "pagefind": "pagefind --site .next/server/app --output-path public/pagefind",
     "test": "vitest run",
@@ -36,6 +36,7 @@
     "remark-html": "^16.0.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
     "@playwright/test": "^1.59.1",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.9.1",
@@ -45,8 +46,11 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.5",
     "autoprefixer": "^10.4.21",
     "decap-server": "^3.7.0",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.4",
     "jsdom": "^29.1.1",
     "pagefind": "^1.3.0",
     "postcss": "^8.5.10",

@@ -11,7 +11,6 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-    command: npm run dev -- -H 0.0.0.0 -p 3000
 
   simmagic-prod:
     build:
@@ -22,4 +21,3 @@ services:
       - "3001:3000"
     environment:
       - NODE_ENV=production
-    command: npm run start -- -H 0.0.0.0 -p 3000

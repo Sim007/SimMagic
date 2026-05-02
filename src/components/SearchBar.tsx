@@ -84,42 +84,24 @@ export default function SearchBar({ locale, labels }: SearchBarProps) {
   useEffect(() => {
     const trimmed = query.trim();
     const activeApi = api;
-
-    if (!trimmed || !activeApi) {
-      setResults([]);
-      return;
-    }
-
     let active = true;
 
     async function runSearch() {
+      if (!trimmed || !activeApi) {
+        setResults([]);
+        return;
+      }
+
       setLoading(true);
 
       try {
-        if (!activeApi) {
-          setResults([]);
-          return;
-        }
-
-        const raw = await activeApi.search(trimmed, {
-          filters: {
-            locale
-          }
-        });
-
+        const raw = await activeApi.search(trimmed, { filters: { locale } });
         const mapped = await Promise.all(raw.results.map((item) => item.data()));
-
-        if (active) {
-          setResults(mapped);
-        }
+        if (active) setResults(mapped);
       } catch {
-        if (active) {
-          setResults([]);
-        }
+        if (active) setResults([]);
       } finally {
-        if (active) {
-          setLoading(false);
-        }
+        if (active) setLoading(false);
       }
     }
 
@@ -140,7 +122,7 @@ export default function SearchBar({ locale, labels }: SearchBarProps) {
     <section className="sticky top-16 z-30 border-b border-cyan-900/30 bg-slate-950/70 backdrop-blur">
       <div className="shell py-3">
         <div className="panel p-2 md:p-3">
-          <div className="flex gap-2">
+          <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
             <input
               type="search"
               value={query}
@@ -149,12 +131,12 @@ export default function SearchBar({ locale, labels }: SearchBarProps) {
               className="w-full rounded-md border border-cyan-900/40 bg-slate-950/70 px-3 py-2 text-sm text-slate-100 outline-none ring-cyan-400 placeholder:text-slate-500 focus:ring-1"
             />
             <button
-              type="button"
+              type="submit"
               className="rounded-md border border-cyan-800/70 bg-cyan-900/25 px-3 py-2 text-sm text-cyan-200"
             >
               {labels.button}
             </button>
-          </div>
+          </form>
 
           {query.trim().length > 0 ? (
             <div className="mt-3">

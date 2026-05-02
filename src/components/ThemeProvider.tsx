@@ -21,25 +21,27 @@ export function useTheme() {
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
-  // On first mount: read localStorage or system preference
+  // On first mount: read localStorage or system preference, then apply to DOM
   useEffect(() => {
     const stored = localStorage.getItem("theme") as Theme | null;
-    if (stored === "light" || stored === "dark") {
-      setTheme(stored);
-    } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setTheme(prefersDark ? "dark" : "light");
-    }
+    const initial: Theme =
+      stored === "light" || stored === "dark"
+        ? stored
+        : window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+
+    const html = document.documentElement;
+    html.classList.toggle("dark", initial === "dark");
+    localStorage.setItem("theme", initial);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTheme(initial);
   }, []);
 
-  // Apply / remove "dark" class on <html> whenever theme changes
+  // Apply / remove "dark" class on <html> whenever theme changes after init
   useEffect(() => {
     const html = document.documentElement;
-    if (theme === "dark") {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
+    html.classList.toggle("dark", theme === "dark");
     localStorage.setItem("theme", theme);
   }, [theme]);
 
