@@ -2,9 +2,25 @@
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://simmagic.example.com";
 
-// Decap CMS is loaded from unpkg.com. The CSP allows that and GitHub API access.
-// 'unsafe-inline' is required for Decap and for Tailwind CSS-in-JS.
-const ContentSecurityPolicy = [
+// Strict CSP for the public site. Next.js requires 'unsafe-inline' for hydration
+// scripts/styles without a nonce-based middleware setup; everything else is locked down.
+const SiteCSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data: blob: https:",
+  `connect-src 'self' ${siteUrl}`,
+  "worker-src 'self' blob:",
+  "frame-src 'self'",
+  "form-action 'self'",
+  "base-uri 'self'",
+  "object-src 'none'"
+].join("; ");
+
+// Decap CMS (served from /admin) is loaded from unpkg.com and needs 'unsafe-eval'
+// for its bundle plus access to the GitHub API.
+const AdminCSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://unpkg.com",
   "style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com",
@@ -14,10 +30,11 @@ const ContentSecurityPolicy = [
   "worker-src 'self' blob:",
   "frame-src 'self'",
   "form-action 'self'",
-  "base-uri 'self'"
+  "base-uri 'self'",
+  "object-src 'none'"
 ].join("; ");
 
-const securityHeaders = [
+const commonHeaders = [
   { key: "X-DNS-Prefetch-Control", value: "on" },
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -25,8 +42,17 @@ const securityHeaders = [
   {
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), payment=()"
-  },
-  { key: "Content-Security-Policy", value: ContentSecurityPolicy }
+  }
+];
+
+const siteHeaders = [
+  ...commonHeaders,
+  { key: "Content-Security-Policy", value: SiteCSP }
+];
+
+const adminHeaders = [
+  ...commonHeaders,
+  { key: "Content-Security-Policy", value: AdminCSP }
 ];
 
 const nextConfig = {
@@ -57,7 +83,11 @@ const nextConfig = {
     return [
       {
         source: "/(.*)",
-        headers: securityHeaders
+        headers: siteHeaders
+      },
+      {
+        source: "/admin/:path*",
+        headers: adminHeaders
       }
     ];
   }
