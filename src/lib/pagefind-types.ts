@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    pagefind?: PagefindApi;
+  }
+}
+
 export type PagefindApi = {
   search: (
     term: string,
