@@ -90,7 +90,11 @@ const sanitizeOptions: sanitizeHtml.IOptions = {
     a: ["href", "name", "target", "rel", "title"]
   },
   allowedSchemes: ["http", "https", "mailto", "tel"],
-  allowProtocolRelative: false
+  allowProtocolRelative: false,
+  transformTags: {
+    // Prevent reverse-tabnabbing on links that open a new tab.
+    a: sanitizeHtml.simpleTransform("a", { rel: "noopener noreferrer" })
+  }
 };
 
 async function markdownToHtml(markdown: string): Promise<string> {

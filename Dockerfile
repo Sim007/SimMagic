@@ -24,5 +24,6 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/next.config.mjs ./next.config.mjs
 COPY --from=builder /app/content ./content
 COPY --from=builder /app/messages ./messages
+USER node
 EXPOSE 3000
 CMD ["node_modules/.bin/next", "start", "-H", "0.0.0.0", "-p", "3000"]
