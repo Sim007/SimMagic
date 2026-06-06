@@ -2,11 +2,21 @@
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://simmagic.example.com";
 
+// React's dev mode needs eval() (e.g. for cross-environment callstacks); production
+// never does. So 'unsafe-eval' is allowed only during local development.
+const isDev = process.env.NODE_ENV !== "production";
+const scriptSrc = [
+  "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'",
+  isDev ? "'unsafe-eval'" : ""
+]
+  .join(" ")
+  .trim();
+
 // Strict CSP for the public site. Next.js requires 'unsafe-inline' for hydration
 // scripts/styles without a nonce-based middleware setup; everything else is locked down.
 const SiteCSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'",
+  scriptSrc,
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https:",
