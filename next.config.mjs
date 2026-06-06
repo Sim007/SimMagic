@@ -29,14 +29,22 @@ const SiteCSP = [
 ].join("; ");
 
 // Decap CMS (served from /admin) is loaded from unpkg.com and needs 'unsafe-eval'
-// for its bundle plus access to the GitHub API.
+// for its bundle plus access to the GitHub API. The localhost CMS proxy
+// (decap-server) is only reachable during local development.
+const adminConnectSrc = [
+  `connect-src 'self' ${siteUrl} https://api.github.com https://unpkg.com`,
+  isDev ? "http://localhost:8081 http://127.0.0.1:8081" : ""
+]
+  .join(" ")
+  .trim();
+
 const AdminCSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://unpkg.com",
   "style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https:",
-  `connect-src 'self' ${siteUrl} https://api.github.com https://unpkg.com http://localhost:8081 http://127.0.0.1:8081`,
+  adminConnectSrc,
   "worker-src 'self' blob:",
   "frame-src 'self'",
   "form-action 'self'",
