@@ -18,7 +18,7 @@ html:not(.dark) {
   --bg: #f0f9ff;
   --bg-soft: #e0f2fe;
   --fg: #0c2333;
-  --muted: #4a7a8a;
+  --muted: #3d6675;
   --accent: #0891b2;
   --card: #ffffff;
   --border: rgba(8, 145, 178, 0.22);
@@ -132,6 +132,37 @@ html:not(.dark) .border-cyan-500\/50 {
 
 html:not(.dark) .placeholder\:text-slate-500::placeholder {
   color: #5b8191;
+}
+
+/* Markdown panels use `prose prose-invert` (built for dark backgrounds). In light
+   mode that puts light text on a white panel, so we remap the inverted prose
+   tokens — and the explicit heading/link variants — back to dark, AA-compliant
+   colors. Applies site-wide to every rendered markdown body. */
+html:not(.dark) .prose-invert {
+  --tw-prose-invert-body: #284a5a;
+  --tw-prose-invert-headings: #0a5f73;
+  --tw-prose-invert-lead: #284a5a;
+  --tw-prose-invert-links: #0a5f73;
+  --tw-prose-invert-bold: #0c2333;
+  --tw-prose-invert-counters: #3d6675;
+  --tw-prose-invert-bullets: #0a5f73;
+  --tw-prose-invert-hr: rgba(8, 145, 178, 0.35);
+  --tw-prose-invert-quotes: #284a5a;
+  --tw-prose-invert-quote-borders: rgba(8, 145, 178, 0.35);
+  --tw-prose-invert-captions: #3d6675;
+  --tw-prose-invert-code: #0c2333;
+  --tw-prose-invert-pre-code: #d9f7ff;
+  --tw-prose-invert-pre-bg: #0b1a27;
+  --tw-prose-invert-th-borders: rgba(8, 145, 178, 0.4);
+  --tw-prose-invert-td-borders: rgba(8, 145, 178, 0.25);
+}
+
+html:not(.dark) .prose-headings\:text-cyan-200 :is(h1, h2, h3, h4) {
+  color: #0a5f73;
+}
+
+html:not(.dark) .prose-a\:text-cyan-300 :is(a) {
+  color: #0a5f73;
 }
 
 @keyframes caret-blink {
