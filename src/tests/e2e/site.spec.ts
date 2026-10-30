@@ -63,6 +63,9 @@ test.describe("Thema toggle", () => {
     const toggle = page.getByRole("button", { name: /modus/i });
     const html = page.locator("html");
 
+    // ThemeProvider sets the class after hydration; wait for it before reading the initial state
+    await expect.poll(async () => await html.getAttribute("class")).not.toBeNull();
+
     const htmlClass = await html.getAttribute("class");
     const wasDark = (htmlClass ?? "").includes("dark");
 

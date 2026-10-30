@@ -24,3 +24,9 @@ export type PagefindApi = {
     }>;
   }>;
 };
+
+declare global {
+  interface Window {
+    pagefind?: PagefindApi;
+  }
+}

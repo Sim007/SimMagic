@@ -29,7 +29,7 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
-    "next": "^16.2.4",
+    "next": "^16.4.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "remark": "^15.0.1",
@@ -52,7 +52,7 @@
     "autoprefixer": "^10.4.21",
     "decap-server": "^3.7.0",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^16.2.4",
+    "eslint-config-next": "^16.4.3",
     "jsdom": "^29.1.1",
     "pagefind": "^1.3.0",
     "postcss": "^8.5.10",
